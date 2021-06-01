@@ -37,7 +37,7 @@ function retornaArrayCategorias(){
 }
 function retornaCategoria(){
     const arrayCategoria= retornaArrayCategorias();
-    let indiceCategoria=Math.floor(Math.random()*arrayCategoria.length);
+    let indiceCategoria=retornaNumAleatorio(arrayCategoria.length);
     return arrayCategoria[indiceCategoria];
 }
 function exibeCategoria(){
@@ -45,7 +45,32 @@ function exibeCategoria(){
 }
 
 /*-------------------------------------------------------------------------
+funções do segundo commit- escolhe a palavra aleatoriamente e oculta na interface
+ mostrando apenas  traços
  */
+function retornaNumAleatorio(max){
+    let numAleatorio=Math.floor(Math.random()*max);
+    return numAleatorio;
+}
+function definePalavraProposta(){
+    const arrayPalavras=categorias[categoria.innerHTML];
+    let indicePalavra=retornaNumAleatorio(arrayPalavras.length);
+    palavraProposta= arrayPalavras[indicePalavra];
+    console.log(palavraProposta);
+    ocultaPalavra();
+}
+function ocultaPalavra(){
+    let palavraOcultada="";
+    for(let i=0;i<palavraProposta.length;i++){
+        palavraOcultada+="-";
+    }
+    exibePalavraInterface(palavraOcultada);
+}
+function exibePalavraInterface(palavra){
+    palavraInterface.innerHTML=palavra;
+}
+/*-------------------------------------------------------------------------
+*/
 
 /*
 Recebe o evento do teclado e passa apenas o valor da letra para a função tentativa
@@ -91,6 +116,7 @@ function iniciaJogo(){
     indiceBoneco = 0;
     letrasErradasArray = [];
     exibeCategoria();
+    definePalavraProposta();
     letrasErradas.innerHTML = "Letras erradas: ";
     window.addEventListener("keypress", retornaLetra);
 }
