@@ -70,6 +70,40 @@ function exibePalavraInterface(palavra){
     palavraInterface.innerHTML=palavra;
 }
 /*-------------------------------------------------------------------------
+funções do terceiro commit- verifica a letra informada, preenche o boneco
+atualiza a interface com letras erradas informadas e tbm a certa
+*/
+
+
+function tentativa(letra){
+    if(palavraProposta.includes(letra)){
+        atualizaPalavraInterface(letra);
+    }else{
+        letrasErradasArray.push(letra);
+        letrasErradas.innerHTML="Letras Erradas: "+ letrasErradasArray;
+        if(partesBoneco.length>indiceBoneco){
+
+            desenhaBoneco();
+        }
+    }
+}
+function atualizaPalavraInterface(letra){
+    let palavraAuxiliar= "";
+    for(let i=0;i<palavraProposta.length;i++){
+        if(palavraProposta[i]===letra){
+            palavraAuxiliar+=letra;
+        }else if(palavraInterface.innerHTML[i]!="-"){
+            palavraAuxiliar+=palavraInterface.innerHTML[i];
+        }
+        else{
+            palavraAuxiliar+="-"
+        }
+    }
+    exibePalavraInterface(palavraAuxiliar);
+}
+
+/*
+--------------------------------------------------------
 */
 
 /*
