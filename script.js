@@ -71,7 +71,7 @@ function exibePalavraInterface(palavra){
 }
 /*-------------------------------------------------------------------------
 funções do terceiro commit- verifica a letra informada, preenche o boneco
-atualiza a interface com letras erradas informadas e tbm a certa
+atualiza a interface com letras erradas informadas e tbm com as  certas
 */
 
 
@@ -86,6 +86,7 @@ function tentativa(letra){
             desenhaBoneco();
         }
     }
+    verificaFimDeJogo();
 }
 function atualizaPalavraInterface(letra){
     let palavraAuxiliar= "";
@@ -104,6 +105,22 @@ function atualizaPalavraInterface(letra){
 
 /*
 --------------------------------------------------------
+função do commit 4 final- verifica fim do jogo 
+*/
+
+function verificaFimDeJogo(){
+    if(!palavraInterface.innerHTML.includes("-")){
+
+        exibePalavraInterface("Você venceu!");
+        window.removeEventListener("keypress",retornaLetra);
+    }else if(letrasErradasArray.length>= numTentativas){
+        desenhaOlhos();
+        exibePalavraInterface("Você Perdeu!");
+        window.removeEventListener("keypress",retornaLetra);
+    }
+}
+/*
+--------
 */
 
 /*
@@ -151,8 +168,10 @@ function iniciaJogo(){
     letrasErradasArray = [];
     exibeCategoria();
     definePalavraProposta();
+    ocultaBoneco();
     letrasErradas.innerHTML = "Letras erradas: ";
     window.addEventListener("keypress", retornaLetra);
+
 }
 
 window.addEventListener("load", iniciaJogo);
